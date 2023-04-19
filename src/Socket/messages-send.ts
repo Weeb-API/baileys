@@ -30,7 +30,8 @@ export const makeMessagesSocket = (config: SocketConfig) => {
 		generateMessageTag,
 		sendNode,
 		groupMetadata,
-		groupToggleEphemeral
+		groupToggleEphemeral,
+		getBusinessProfile,
 	} = sock
 
 	const userDevicesCache = config.userDevicesCache || new NodeCache({
@@ -505,12 +506,18 @@ export const makeMessagesSocket = (config: SocketConfig) => {
 				}
 
 				const buttonType = getButtonType(message)
+				const bizProf = await getBusinessProfile(authState.creds.me!.id)
+				if (bizProf) {
+					(stanza.content as BinaryNode[]).push({
+						tag: 'verified_name',
+						attrs: {},
+						content: Buffer.from(authState.creds.me?.verifiedName ?? 'Well')
+					})
+				}
 				if(buttonType){
 					(stanza.content as BinaryNode[]).push({
 						tag: 'biz',
-						attrs: { 
-							paid_convo_category: "business_initiated",
-						},
+						attrs: { },
 						content: [
 							{
 								tag: buttonType,
