@@ -508,7 +508,9 @@ export const makeMessagesSocket = (config: SocketConfig) => {
 				if(buttonType){
 					(stanza.content as BinaryNode[]).push({
 						tag: 'biz',
-						attrs: { },
+						attrs: { 
+							paid_convo_category: "business_initiated",
+						},
 						content: [
 							{
 								tag: buttonType,
