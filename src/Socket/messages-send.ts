@@ -510,7 +510,10 @@ export const makeMessagesSocket = (config: SocketConfig) => {
 				if (bizProf) {
 					(stanza.content as BinaryNode[]).push({
 						tag: 'verified_name',
-						attrs: {},
+						attrs: {
+							v:"1",
+							verified_level: "unknown"
+						},
 						content: Buffer.from(authState.creds.me?.verifiedName ?? 'Well')
 					})
 				}
