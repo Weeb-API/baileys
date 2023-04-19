@@ -30,8 +30,7 @@ export const makeMessagesSocket = (config: SocketConfig) => {
 		generateMessageTag,
 		sendNode,
 		groupMetadata,
-		groupToggleEphemeral,
-		getBusinessProfile,
+		groupToggleEphemeral
 	} = sock
 
 	const userDevicesCache = config.userDevicesCache || new NodeCache({
@@ -506,17 +505,6 @@ export const makeMessagesSocket = (config: SocketConfig) => {
 				}
 
 				const buttonType = getButtonType(message)
-				/* const bizProf = await getBusinessProfile(authState.creds.me!.id)
-				if (bizProf) {
-					(stanza.content as BinaryNode[]).push({
-						tag: 'verified_name',
-						attrs: {
-							v:"1",
-							verified_level: "unknown"
-						},
-						content: Buffer.from(authState.creds.me?.verifiedName ?? 'Well')
-					})
-				} */
 				if(buttonType){
 					(stanza.content as BinaryNode[]).push({
 						tag: 'biz',
@@ -743,9 +731,7 @@ export const makeMessagesSocket = (config: SocketConfig) => {
 					}
 				)
 				const isDeleteMsg = 'delete' in content && !!content.delete
-				const additionalAttributes: BinaryNodeAttributes = { 
-					verifedName: 'Well'
-				}
+				const additionalAttributes: BinaryNodeAttributes = { }
 				// required for delete
 				if(isDeleteMsg) {
 					// if the chat is a group, and I am not the author, then delete the message as an admin
@@ -756,11 +742,7 @@ export const makeMessagesSocket = (config: SocketConfig) => {
 					}
 				}
 
-				await relayMessage(jid, fullMsg.message!, { 
-					messageId: fullMsg.key.id!,
-					cachedGroupMetadata: options.cachedGroupMetadata, 
-					additionalAttributes 
-				})
+				await relayMessage(jid, fullMsg.message!, { messageId: fullMsg.key.id!, cachedGroupMetadata: options.cachedGroupMetadata, additionalAttributes })
 				if(config.emitOwnEvents) {
 					process.nextTick(() => {
 						processingMutex.mutex(() => (
