@@ -1,19 +1,11 @@
 {
-  "name": "@adiwajshing/baileys",
+  "name": "whatsapp-dev",
   "version": "5.0.0",
   "description": "WhatsApp API",
-  "homepage": "https://github.com/adiwajshing/Baileys",
   "main": "lib/index.js",
   "types": "lib/index.d.ts",
   "keywords": [
     "whatsapp",
-    "js-whatsapp",
-    "whatsapp-api",
-    "whatsapp-web",
-    "whatsapp",
-    "whatsapp-chat",
-    "whatsapp-group",
-    "automation",
     "multi-device"
   ],
   "scripts": {
@@ -27,14 +19,12 @@
     "lint": "eslint . --ext .js,.ts,.jsx,.tsx",
     "lint:fix": "eslint . --fix --ext .js,.ts,.jsx,.tsx"
   },
-  "author": "Adhiraj Singh",
+  "author": "already left",
   "license": "MIT",
-  "repository": {
-    "url": "git@github.com:adiwajshing/baileys.git"
-  },
   "dependencies": {
     "@hapi/boom": "^9.1.3",
-    "axios": "0.27.2",
+    "axios": "^1.3.5",
+    "axios-cache-interceptor": "^1.0.1",
     "futoin-hkdf": "^1.5.1",
     "libsignal": "git+https://github.com/adiwajshing/libsignal-node",
     "music-metadata": "^7.12.3",
